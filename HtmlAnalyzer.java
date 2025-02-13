@@ -1,6 +1,7 @@
 import java.net.*;
 import java.io.*;
-public class htmlAnalyzer {
+
+public class HtmlAnalyzer {
  
      public static void main (String[] args) throws Exception{
             
@@ -11,11 +12,13 @@ public class htmlAnalyzer {
         URL url = uri.toURL();
         BufferedReader  inputBuffer = new BufferedReader(new InputStreamReader(url.openStream()));
         String inputLine = "";
-
-
+        
+        /* 
         while ((inputLine = inputBuffer.readLine()) != null) {
             System.out.println(inputLine);
         }
-
+        */
+        
+        HtmlReader.htmlReader(inputBuffer);
      }
 }
