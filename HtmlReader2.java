@@ -1,14 +1,17 @@
 import java.io.*;
 
-public class HtmlReader {
+public class HtmlReader2 {
+
+    static private int depth = 0;
+    static private int maxDepth = 0;
+    static private String message = "";
+    static private String buffLine = "";
 
     public static void htmlReader(BufferedReader inputBuff) throws IOException{
-        htmlReader(inputBuff,0,0,"");
+        htmlReader(inputBuff, depth, maxDepth, message);
     }
 
     private static void htmlReader(BufferedReader inputBuff,int depth, int maxDepth, String message) throws IOException{
-        
-        String buffLine = "";
 
         if ((buffLine = inputBuff.readLine()) == null ){
             System.out.println(message);
