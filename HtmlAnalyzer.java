@@ -5,21 +5,8 @@ public class HtmlAnalyzer {
  
      public static void main (String[] args) throws Exception{
         
+      Html html = new Html(args[0]);
       
-      try {
-         //URI uri = new URI(args[0]);
-        URI uri = new URI("http://hiring.axreng.com/internship/example1.html");
-        URL url = uri.toURL();
-        BufferedReader  inputBuffer = new BufferedReader(new InputStreamReader(url.openStream()));
-        //HtmlReader.htmlReader(inputBuffer,0,0,"");
-        HtmlReader2.htmlReader(inputBuffer);
-        //HtmlReader3 htmlReaderVar = new HtmlReader3();
-        //HtmlReader3.htmlReader(inputBuffer);
-        inputBuffer.close();
-         
-      } catch (IOException e) {
-         System.err.println("URL connection error");
-      }
 
      }
 }
