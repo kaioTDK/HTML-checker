@@ -8,16 +8,18 @@ public class HtmlReader {
     static private String buffLine = "";
     static private isVerbose verbose = isVerbose.noVerbose;
 
-    public static void htmlReader(BufferedReader inputBuff) throws IOException{
+    public static void htmlReader(Html inputBuff) throws IOException{
        // HtmlChecker.htmlChecker(inputBuff);
         htmlReader(inputBuff, depth, maxDepth, message);
         
     }
-    public static void htmlReader(BufferedReader inputBuff, isVerbose verboseFlag) throws IOException{
+    public static void htmlReader(Html inputBuff, isVerbose verboseFlag) throws IOException{
+        HtmlChecker.htmlChecker(inputBuff);
+        verbose = verboseFlag;
         htmlReader(inputBuff, depth, maxDepth, message);
     }
 
-    private static void htmlReader(BufferedReader inputBuff,int depth, int maxDepth, String message) throws IOException{
+    private static void htmlReader(Html inputBuff,int depth, int maxDepth, String message) throws IOException{
 
         switch (verbose) {
             case verbose:

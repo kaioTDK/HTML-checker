@@ -1,19 +1,31 @@
+
+import java.net.URISyntaxException;
+
 public class Html {
     
-    private static String[] html;
-    private static int i = 0;
+    private String[] html ;
+    private  int i = 0;
     
-    public Html(String htmlURL){
+    public Html(String htmlURL) throws URISyntaxException{
         html = HtmlCon.getHtml(htmlURL);
     }
-
-    public static String readLine(){
+    
+    public String readLine(){
+        if (i >= html.length) {
+            return null;
+        }
         String line = html[i];
         i +=1;
-        return line;
+        if (line != null) return line;
+        return null;
+    }
+
+    public boolean isEnd(){
+        if (i >= html.length) return true;
+        return false;
     }
     
-    public static void reset(){
+    public  void reset(){
         i = 0;
     }
 }
