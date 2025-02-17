@@ -10,8 +10,9 @@ public class HtmlCon {
     static private String line = "";
     static private ArrayList<String> htmlTemp = new ArrayList<String>();
     static private String[] html;
+    static private VerboseFlag verbose = VerboseFlag.noVerbose;
 
-    static public String[] getHtml(String args) throws URISyntaxException{
+    static public String[] getHtml(String args, VerboseFlag verbose) throws URISyntaxException{
         
         try {
         URI uri = new URI(args);

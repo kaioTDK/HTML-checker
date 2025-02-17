@@ -1,4 +1,4 @@
-public enum isVerbose {
+public enum VerboseFlag {
     verbose,
     noVerbose 
 }

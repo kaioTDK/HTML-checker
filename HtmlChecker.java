@@ -6,6 +6,7 @@ public class HtmlChecker {
     static private ArrayList<HtmlElement> closedTags = new ArrayList<>();
     static private int depth = 0;
     static private String buffLine = "";
+    static private VerboseFlag verbose = VerboseFlag.noVerbose;
 
     static public void htmlChecker(Html inputBuffer){
         htmlTagsChecker(inputBuffer);
@@ -33,9 +34,11 @@ public class HtmlChecker {
 
             while ( j < closedTags.size()){
                 closedElement = closedTags.get(j);
-                System.out.println("this is the opened: "+ openElement.element()+ " " + openElement.depth());
-                System.out.println("this is the closed: " + closedElement.element()+ " " + closedElement.depth());
-                System.out.println(openElement.equals(closedElement));
+                if(verbose == VerboseFlag.verbose){
+                    System.out.println("this is the opened: "+ openElement.element()+ " " + openElement.depth());
+                    System.out.println("this is the closed: " + closedElement.element()+ " " + closedElement.depth());
+                    System.out.println(openElement.equals(closedElement));
+                }
                 if (openElement.isEqual(closedElement)){
                     isClosed = true;
                     j += 1;
@@ -45,7 +48,6 @@ public class HtmlChecker {
                 j += 1;
             }
             if (!isClosed) {
-                System.err.println("crashed here!");
                 System.err.println("malformed HTML"); 
                 System.exit(0);
             }
@@ -57,7 +59,7 @@ public class HtmlChecker {
     static private void htmlTagsChecker(Html inputBuff){
         
         if ((buffLine = inputBuff.readLine()) == null ) return;
-        buffLine = buffLine.strip();
+        //buffLine = buffLine.strip();
 
         if (buffLine.matches("<[a-z-A-Z-0-9- ]+>")){
             depth += 1;
@@ -69,16 +71,13 @@ public class HtmlChecker {
             depth -= 1;
             htmlTagsChecker(inputBuff);
         }
-
         htmlTagsChecker(inputBuff);
     } 
 }
 
 record HtmlElement(String element, int depth) {
     boolean isEqual(HtmlElement element){
-        if (this.element().equals(element.element())  & this.depth() == element.depth()){
-            return true;
-        }
+        if (this.element().equals(element.element())  & this.depth() == element.depth()) return true;
         return false;
     }
 }

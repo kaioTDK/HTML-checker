@@ -6,14 +6,14 @@ public class HtmlReader {
     static private int maxDepth = 0;
     static private String message = "";
     static private String buffLine = "";
-    static private isVerbose verbose = isVerbose.noVerbose;
+    static private VerboseFlag verbose = VerboseFlag.noVerbose;
 
     public static void htmlReader(Html inputBuff) throws IOException{
        // HtmlChecker.htmlChecker(inputBuff);
         htmlReader(inputBuff, depth, maxDepth, message);
         
     }
-    public static void htmlReader(Html inputBuff, isVerbose verboseFlag) throws IOException{
+    public static void htmlReader(Html inputBuff, VerboseFlag verboseFlag) throws IOException{
         HtmlChecker.htmlChecker(inputBuff);
         verbose = verboseFlag;
         htmlReader(inputBuff, depth, maxDepth, message);
