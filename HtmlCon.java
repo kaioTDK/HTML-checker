@@ -23,7 +23,7 @@ public class HtmlCon {
          
       } catch (IOException e) {
          System.err.println("URL connection error");
-        // System.err.println(e.getMessage());
+         System.exit(0);
       }
       return html;
     }
