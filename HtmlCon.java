@@ -10,18 +10,16 @@ public class HtmlCon {
     static private String line = "";
     static private ArrayList<String> htmlTemp = new ArrayList<String>();
     static private String[] html;
-    static private VerboseFlag verbose = VerboseFlag.noVerbose;
 
-    static public String[] getHtml(String args, VerboseFlag verbose) throws URISyntaxException{
+    static public String[] getHtml(String args) throws URISyntaxException{
         
         try {
-        URI uri = new URI(args);
-        URL url = uri.toURL();
-        BufferedReader inputBuffer = new BufferedReader(new InputStreamReader(url.openStream()));
-        htmlReader(inputBuffer);
-        html = htmlTemp.toArray(new String[0]);
-        inputBuffer.close();
-        
+          URI uri = new URI(args);
+          URL url = uri.toURL();
+          BufferedReader inputBuffer = new BufferedReader(new InputStreamReader(url.openStream()));
+          htmlReader(inputBuffer);
+          html = htmlTemp.toArray(new String[0]);
+          inputBuffer.close();
          
       } catch (IOException e) {
          System.err.println("URL connection error");

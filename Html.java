@@ -1,4 +1,3 @@
-
 import java.net.URISyntaxException;
 
 public class Html {
@@ -6,7 +5,8 @@ public class Html {
     private String[] html ;
     private  int i = 0;
     
-    public Html(String htmlURL) throws URISyntaxException{
+    public Html(String htmlURL, VerboseFlag verbose) throws URISyntaxException{
+        if(verbose == VerboseFlag.verbose) System.out.println("\nConnecting to URL and caching HTML...");
         html = HtmlCon.getHtml(htmlURL);
     }
     

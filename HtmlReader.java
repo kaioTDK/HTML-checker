@@ -5,53 +5,48 @@ public class HtmlReader {
     static private int depth = 0;
     static private int maxDepth = 0;
     static private String message = "";
-    static private String buffLine = "";
-    static private VerboseFlag verbose = VerboseFlag.noVerbose;
+    static private String htmlLine = "";
 
-    public static void htmlReader(Html inputBuff) throws IOException{
-       // HtmlChecker.htmlChecker(inputBuff);
-        htmlReader(inputBuff, depth, maxDepth, message);
-        
-    }
-    public static void htmlReader(Html inputBuff, VerboseFlag verboseFlag) throws IOException{
-        HtmlChecker.htmlChecker(inputBuff);
-        verbose = verboseFlag;
-        htmlReader(inputBuff, depth, maxDepth, message);
+    public static void htmlReader(Html html, VerboseFlag verboseFlag) throws IOException{
+        if (verboseFlag == VerboseFlag.verbose) System.out.println("\nCalling html checker:");
+        HtmlChecker.htmlChecker(html, verboseFlag);
+        if (verboseFlag == VerboseFlag.verbose) System.out.println("\nCalling html reader:\n");
+        htmlReader(html, depth, maxDepth, message, verboseFlag);
     }
 
-    private static void htmlReader(Html inputBuff,int depth, int maxDepth, String message) throws IOException{
+    private static void htmlReader(Html html,int depth, int maxDepth, String message, VerboseFlag verboseFlag) throws IOException{
 
-        switch (verbose) {
+        switch (verboseFlag) {
             case verbose:
-                if ((buffLine = inputBuff.readLine()) == null ){
-                    System.out.println(message);
-                    System.out.println(maxDepth);
+                if ((htmlLine = html.readLine()) == null ){
+                    System.out.println("\nMessage: " + message);
+                    System.out.println("depth: " + maxDepth);
                     return;
                 }
-                    System.out.println("i'm at line:" + buffLine);
+                    System.out.println("HTML line:" + htmlLine);
                 break;
             case noVerbose:
-                if ((buffLine = inputBuff.readLine()) == null ) {
+                if ((htmlLine = html.readLine()) == null ) {
                      System.out.println(message);
                     return;
                 }
-                    break;
+                break;
             default:
                 break;
         }
         
-        if (buffLine.trim().matches("<[a-z-A-Z-0-9- ]+>")){
-            htmlReader(inputBuff, depth + 1, maxDepth, message);
+        if (htmlLine.trim().matches("<[a-z-A-Z-0-9- ]+>")){
+            htmlReader(html, depth + 1, maxDepth, message, verboseFlag);
         }
-        else if (buffLine.trim().matches("<[\\/][a-z-A-Z-0-9- ]+>") ){
-            htmlReader(inputBuff, depth - 1, maxDepth, message);
+        else if (htmlLine.trim().matches("<[\\/][a-z-A-Z-0-9- ]+>") ){
+            htmlReader(html, depth - 1, maxDepth, message, verboseFlag);
         }
-        else if (!buffLine.matches("<([^<]+)>") & depth > maxDepth & !buffLine.isEmpty()){
-            message = buffLine.trim();
-            htmlReader(inputBuff, depth, depth, message);
+        else if (!htmlLine.matches("<([^<]+)>") & depth > maxDepth & !htmlLine.isEmpty()){
+            message = htmlLine.trim();
+            htmlReader(html, depth, depth, message, verboseFlag);
         }
         else{
-            htmlReader(inputBuff, depth, maxDepth, message);
+            htmlReader(html, depth, maxDepth, message, verboseFlag);
         }
     }
 }
