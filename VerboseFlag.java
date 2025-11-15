@@ -1,4 +1,4 @@
-public enum VerboseFlag {
+public ranenum VerboseFlag {
     verbose,
     noVerbose 
 }

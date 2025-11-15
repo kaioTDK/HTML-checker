@@ -1,4 +1,4 @@
-# HTML Analyzer
+git# HTML Analyzer
 
 This Java program analyzes HTML content from a given URL and checks for well-formedness (matching opening and closing tags).  It offers a verbose mode for debugging and a help option for usage instructions.
 

@@ -2,6 +2,8 @@ public class HtmlAnalyzer {
  
      public static void main (String[] args) throws Exception{
           
+          Thread.sleep(10000);
+
           if (args.length == 0) {
                System.err.println("please, use as: java HtmlAnalyzer [URL] or java HtmlAnalyzer -h to see help");
                System.exit(0);
